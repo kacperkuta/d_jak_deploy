@@ -59,7 +59,7 @@ def send_patient(pk: int):
     global i
     global patients
     if (i < pk):
-        raise HTTPException(status_code=404, detail="Item not found")    
+        raise HTTPException(status_code=204, detail="Item not found")    
     else:
         return patients[pk-1]
 

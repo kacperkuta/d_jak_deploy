@@ -61,5 +61,5 @@ def test_post_patient():
 
     response = client.get(f'/patient/{4}')
 
-    assert response.status_code == 404
+    assert response.status_code == 204
 
