@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 @app.get('/')
 def hello_world():
-    return {"message":"Hello world"}
+    return {"message": "Hello World during the coronavirus pandemic!"}
 
 
 class HelloNameResp(BaseModel):
