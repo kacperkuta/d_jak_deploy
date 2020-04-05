@@ -12,7 +12,7 @@ class NumerizedPatient(BaseModel):
     patient: Patient
 
 global i
-i = 0
+i = -1
 
 patients = []
 
@@ -50,6 +50,7 @@ def increment():
 
 @app.post('/patient', response_model=NumerizedPatient)
 def post_patient(p: Patient):
+    global i
     increment()
     patients.append(p)
     return NumerizedPatient(id=i, patient = p)
@@ -61,6 +62,6 @@ def send_patient(pk: int):
     if (i < pk):
         raise HTTPException(status_code=204, detail="Item not found")    
     else:
-        return patients[pk-1]
+        return patients[pk]
 
 

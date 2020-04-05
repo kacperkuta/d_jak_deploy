@@ -37,29 +37,29 @@ def test_delete_method():
 def test_post_patient():
     response = client.post('/patient', json={"name":"Marta", "surename":"Markocka"})
     assert response.status_code == 200
-    assert response.json() == {"id":1, "patient":{"name":"Marta", "surename":"Markocka"}}
+    assert response.json() == {"id":0, "patient":{"name":"Marta", "surename":"Markocka"}}
 
     response = client.post('/patient', json={"name":"Tomasz", "surename":"Aaaa"})
     assert response.status_code == 200
-    assert response.json() == {"id":2, "patient":{"name":"Tomasz", "surename":"Aaaa"}}
+    assert response.json() == {"id":1, "patient":{"name":"Tomasz", "surename":"Aaaa"}}
 
     response = client.post('/patient', json={"name":"Kuba", "surename":"Byrdy"})
     assert response.status_code == 200
-    assert response.json() == {"id":3, "patient":{"name":"Kuba", "surename":"Byrdy"}}
+    assert response.json() == {"id":2, "patient":{"name":"Kuba", "surename":"Byrdy"}}
 
-    response = client.get(f'/patient/{1}')
+    response = client.get(f'/patient/{0}')
     assert response.status_code == 200
     assert response.json() == {"name":"Marta", "surename":"Markocka"}
 
-    response = client.get(f'/patient/{2}')
+    response = client.get(f'/patient/{1}')
     assert response.status_code == 200
     assert response.json() == {"name":"Tomasz", "surename":"Aaaa"}
 
-    response = client.get(f'/patient/{3}')
+    response = client.get(f'/patient/{2}')
     assert response.status_code == 200
     assert response.json() == {"name":"Kuba", "surename":"Byrdy"}
 
-    response = client.get(f'/patient/{4}')
+    response = client.get(f'/patient/{3}')
 
     assert response.status_code == 204
 
