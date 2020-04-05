@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 app = FastAPI()
 
 from pydantic import BaseModel
@@ -13,6 +13,8 @@ class NumerizedPatient(BaseModel):
 
 global i
 i = 0
+
+patients = []
 
 @app.get('/')
 def hello_world():
@@ -49,6 +51,16 @@ def increment():
 @app.post('/patient', response_model=NumerizedPatient)
 def post_patient(p: Patient):
     increment()
+    patients.append(p)
     return NumerizedPatient(id=i, patient = p)
+
+@app.get('/patient/{pk}', response_model=Patient)
+def send_patient(pk: int):
+    global i
+    global patients
+    if (i < pk):
+        raise HTTPException(status_code=404, detail="Item not found")    
+    else:
+        return patients[pk-1]
 
 
