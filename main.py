@@ -12,7 +12,7 @@ class NumerizedPatient(BaseModel):
     patient: Patient
 
 global i
-i = -1
+i = 0
 
 @app.get('/')
 def hello_world():
