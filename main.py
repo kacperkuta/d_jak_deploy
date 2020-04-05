@@ -14,3 +14,19 @@ class HelloNameResp(BaseModel):
 @app.get('/hello/{name}', response_model=HelloNameResp)
 def hello_name(name: str):
     return HelloNameResp(message= f"Hello {name}")
+
+@app.get('/method')
+def get_method():
+    return {"method":"GET"}
+
+@app.put('/method')
+def put_method():
+    return {"method":"PUT"}
+
+@app.delete('/method')
+def delete_method():
+    return {"method":"DELETE"}
+
+@app.post('/method')
+def post_method():
+    return {"method":"POST"}
