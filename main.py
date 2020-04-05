@@ -3,6 +3,17 @@ app = FastAPI()
 
 from pydantic import BaseModel
 
+class Patient(BaseModel):
+    name: str
+    surename: str
+
+class NumerizedPatient(BaseModel):
+    id: int
+    patient: Patient
+
+global i
+i = -1
+
 @app.get('/')
 def hello_world():
     return {"message": "Hello World during the coronavirus pandemic!"}
@@ -30,3 +41,14 @@ def delete_method():
 @app.post('/method')
 def post_method():
     return {"method":"POST"}
+
+def increment():
+    global i
+    i = i + 1
+
+@app.post('/patient', response_model=NumerizedPatient)
+def post_patient(p: Patient):
+    increment()
+    return NumerizedPatient(id=i, patient = p)
+
+
